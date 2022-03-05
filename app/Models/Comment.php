@@ -11,12 +11,12 @@ class Comment extends Model
     protected $table = 'comments';
     protected $primaryKey = 'comment_id';
 
-    public function post(){
+    public function posts(){
         
         return $this->belongsTo(Post::class);
     }
 
-    public function user(){
+    public function users(){
         return $this->belongsTo(User::class);
     }
 }

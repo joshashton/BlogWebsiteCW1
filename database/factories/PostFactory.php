@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
+   
+    
     /**
      * Define the model's default state.
      *
@@ -17,11 +19,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+
+        $users = \App\models\User::pluck('user_id')->toArray();
+        //$users = User::all()->pluck('id')->toArray();
         return [
             
             'description' => $this->faker->realText($maxNbChars = 15, $indexSize = 2),
-            'user_id' => 1,
-
+            'user_id' => $this->faker->randomElement($users) ,
         ];
     }
 }
