@@ -18,6 +18,14 @@ class PostTableSeeder extends Seeder
         $a  = new Post();
         $a -> description = "This is my post";
         $a -> user_id = 1;
+        $a -> save();
+
+        $b  = new Post();
+        $b -> description = "This is my 2nd post";
+        $b -> user_id = 1;
+        $b -> save();
+
+        Post::factory()->count(50)->create();
 
     }
 }

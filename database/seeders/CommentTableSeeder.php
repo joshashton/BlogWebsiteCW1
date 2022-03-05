@@ -20,7 +20,15 @@ class CommentTableSeeder extends Seeder
         $a -> user_id = 1;
         $a -> post_id = 1;
         $a -> description = "This is my comment";
+        $a -> save();
+
+        $b  = new Comment();
+        $b -> user_id = 2;
+        $b -> post_id = 1;
+        $b -> description = "This is my comment";
+        $b -> save();
+
+        Comment::factory()->count(50)->create();
        
-    
     }
 }
