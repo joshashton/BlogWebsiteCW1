@@ -17,7 +17,7 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-
+        //get list of all id's in database 
         $users = \App\models\User::pluck('user_id')->toArray();
         $posts = \App\models\Post::pluck('post_id')->toArray();
         
