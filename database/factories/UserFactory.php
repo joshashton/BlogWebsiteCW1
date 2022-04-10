@@ -20,7 +20,7 @@ class UserFactory extends Factory
     {
         return [
             
-            'user_name' => $this->faker->username(25),
+            'name' => $this->faker->username(25),
             'email' => $this->faker->unique()->safeEmail(),
             //'email_verified_at' => now(),
             'password' => $this->faker->regexify('[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}'),
