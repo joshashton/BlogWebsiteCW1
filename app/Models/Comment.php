@@ -11,6 +11,9 @@ class Comment extends Model
     protected $table = 'comments';
     protected $primaryKey = 'comment_id';
 
+    protected $fillable = [
+        'description'];
+
     public function posts(){
         
         return $this->belongsTo(Post::class);
