@@ -21,4 +21,22 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+Route::post('/viewpost', function () {
+    return view('viewpost');
+})->name('viewpost');
+
+
+// The route we have created to show all blog posts.
+Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index']);
+
+Route::get('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'show']);
+
+Route::get('/blog/create/post', [\App\Http\Controllers\BlogPostController::class, 'create']); //shows create post form
+Route::post('/blog/create/post', [\App\Http\Controllers\BlogPostController::class, 'store']); //saves the created post to the databse
+Route::get('/blog/{post}/edit', [\App\Http\Controllers\BlogPostController::class, 'edit']); //shows edit post form
+
+Route::put('/blog/{post}/edit', [\App\Http\Controllers\BlogPostController::class, 'update']); //commits edited post to the database 
+Route::delete('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'destroy']); //deletes post from the database
+
 require __DIR__.'/auth.php';
