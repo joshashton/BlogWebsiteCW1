@@ -16,11 +16,13 @@ class PostTableSeeder extends Seeder
     public function run()
     {
         $a  = new Post();
+        $a -> title = "first post";
         $a -> description = "This is my post";
         $a -> user_id = 1;
         $a -> save();
 
         $b  = new Post();
+        $b -> title = "second post";
         $b -> description = "This is my 2nd post";
         $b -> user_id = 1;
         $b -> save();

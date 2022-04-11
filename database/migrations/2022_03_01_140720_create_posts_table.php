@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('post_id');
+            $table->longText('title');
             $table->longText('description');
             $table->unsignedBigInteger('user_id');
         
