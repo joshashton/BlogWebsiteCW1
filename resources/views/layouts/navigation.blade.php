@@ -48,9 +48,9 @@
                             </x-dropdown-link>                   
                         </form>
 
-                        <form method="GET" action="{{ route('myposts') }}">
+                        <form method="GET" action="{{ route('create/post') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                            <x-dropdown-link :href="route('myposts')"
+                            <x-dropdown-link :href="route('create/post')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Create Post') }}

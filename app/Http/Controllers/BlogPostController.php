@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class BlogPostController extends Controller
 {
@@ -24,6 +28,18 @@ class BlogPostController extends Controller
             'posts' => $posts,
         ]); //returns the view with posts
         
+    }
+
+    public function save_comment(Request $request){
+        $data=new Comment;
+        $data->post_id=$request->post;
+        $data->description=$request->comment;
+        $data->user_id=$request->user;
+        $data->save();
+        
+        return response()->json([
+            'bool'=>true
+        ]);
     }
 
     /**
@@ -61,9 +77,26 @@ class BlogPostController extends Controller
      */
     public function show(Post $post)
     {
+        //$posts = Post::where('user_id', '=', auth()->user()->user_id)->get();//get all post from current user
         //return $post; //returns the fetched posts
+
+        //$comment = Comment::all();
+        $postid = $post -> post_id;
+        
+        $comments = DB::table('comments')
+                ->leftjoin('users','users.user_id','=','comments.user_id')
+                ->where('comments.post_id', '=', $postid)
+                ->orderby('comments.created_at', 'desc')
+                ->get();
+        
+
+        //$comments = Comment::where('post_id', '=', $postid)->get();
+        //$users = User::where('user_id', '=', $comments->user_id)->get();
+        //$post -> post_id
+        //var_dump($comments);
+        //exit();
         return view('blog.show', [
-            'post' => $post,
+            'post' => $post, 'comments' => $comments,
         ]); //returns the view with the post
     }
 
