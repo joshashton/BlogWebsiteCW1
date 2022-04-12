@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('blog') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('blog')" :active="request()->routeIs('blog')">
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
@@ -39,12 +39,21 @@
                     <x-slot name="content">
                         <!-- Authentication -->
         
-                        <form method="POST" action="{{ route('viewpost') }}">
+                        <form method="GET" action="{{ route('myposts') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="route('myposts')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('My Posts') }}
+                            </x-dropdown-link>                   
+                        </form>
+
+                        <form method="GET" action="{{ route('myposts') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <x-dropdown-link :href="route('myposts')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Create Post') }}
                             </x-dropdown-link>                   
                         </form>
                                                     

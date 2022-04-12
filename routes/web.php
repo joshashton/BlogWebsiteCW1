@@ -28,15 +28,18 @@ Route::post('/viewpost', function () {
 
 
 // The route we have created to show all blog posts.
-Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index']);
+Route::get('/blog', [\App\Http\Controllers\BlogPostController::class, 'index'])->name('blog');
 
 Route::get('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'show']);
 
-Route::get('/blog/create/post', [\App\Http\Controllers\BlogPostController::class, 'create']); //shows create post form
+Route::get('/blog/create/post', [\App\Http\Controllers\BlogPostController::class, 'create'])->middleware('auth'); //shows create post form
 Route::post('/blog/create/post', [\App\Http\Controllers\BlogPostController::class, 'store']); //saves the created post to the databse
 Route::get('/blog/{post}/edit', [\App\Http\Controllers\BlogPostController::class, 'edit']); //shows edit post form
 
 Route::put('/blog/{post}/edit', [\App\Http\Controllers\BlogPostController::class, 'update']); //commits edited post to the database 
 Route::delete('/blog/{post}', [\App\Http\Controllers\BlogPostController::class, 'destroy']); //deletes post from the database
+
+//gets all posts created by that user 
+Route::get('/myposts', [\App\Http\Controllers\UserPostController::class, 'index'])->middleware('auth')->name('myposts');
 
 require __DIR__.'/auth.php';

@@ -1,0 +1,9 @@
+<html>
+    <head>
+        <title>Posts</title>
+    </head>
+    <body>
+        <h1>Posts</h1>
+        <p></p>
+    </body>
+</html>

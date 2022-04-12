@@ -24,7 +24,7 @@ class PostFactory extends Factory
         //$users = User::all()->pluck('id')->toArray();
         return [
             'title' => $this->faker->realText($maxNbChars = 10, $indexSize = 2),
-            'description' => $this->faker->realText($maxNbChars = 15, $indexSize = 2),
+            'description' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
             'user_id' => $this->faker->randomElement($users) ,
         ];
     }
