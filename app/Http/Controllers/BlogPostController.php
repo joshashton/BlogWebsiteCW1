@@ -89,14 +89,20 @@ class BlogPostController extends Controller
                 ->orderby('comments.created_at', 'desc')
                 ->get();
         
-
+        $posts = DB::table('posts')
+                ->leftjoin('users','users.user_id','=','posts.user_id')
+                ->where('posts.post_id', '=', $postid)
+                ->get();
+        // $posts = Post::leftjoin('users','users.user_id','=','posts.user_id')
+        //         ->where('posts.post_id', '=', $postid)->get();
+        
         //$comments = Comment::where('post_id', '=', $postid)->get();
         //$users = User::where('user_id', '=', $comments->user_id)->get();
         //$post -> post_id
-        //var_dump($comments);
+        //var_dump($posts);
         //exit();
         return view('blog.show', [
-            'post' => $post, 'comments' => $comments,
+            'post' => $posts->first(), 'comments' => $comments,
         ]); //returns the view with the post
     }
 

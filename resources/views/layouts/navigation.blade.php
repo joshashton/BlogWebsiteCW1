@@ -56,6 +56,15 @@
                                 {{ __('Create Post') }}
                             </x-dropdown-link>                   
                         </form>
+
+                        <form method="GET" action="{{ route('mycomments') }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <x-dropdown-link :href="route('mycomments')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('My Comments') }}
+                            </x-dropdown-link>                   
+                        </form>
                                                     
                         
                         <form method="POST" action="{{ route('logout') }}">
@@ -81,7 +90,14 @@
                     </svg>
                 </button>
             </div>
+            @else
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Login') }}
+                    </x-nav-link>
+            </div>
             @endif
+
         </div>
     </div>
 

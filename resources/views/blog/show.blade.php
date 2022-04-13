@@ -3,6 +3,7 @@
 
 
     <div class="container">
+        
         @if (Auth::check() && $post->user_id == auth()->user()->user_id )
         <div class="row">
             <div class="col-md-12">
@@ -25,6 +26,7 @@
                         <div class="col-auto d-none d-lg-block">
                             <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="33%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                         </div>
+                        <p class="card-text mb-auto">Posted by {{ ucfirst($post->name) }}</p> 
                     </div>
                 </div>
             </div>
@@ -47,9 +49,9 @@
             <div class="comments">
                 
         @forelse($comments as $comment)
-        
+           
                 <!-- COMMENT 1 - START -->
-                <div class="media ">
+                <div class="media mb-5">
                     
                     <div class="media-body">
                         <h4 class="media-heading">{{ $comment->name }}</h4>
@@ -62,6 +64,7 @@
                         
                     </div>
                 </div>
+
                 <!-- COMMENT 1 - END -->
         @empty
             <p class="text-warning">No comments available</p>
@@ -99,7 +102,7 @@ $(".save-comment").on('click',function(){
         },
         success:function(res){
             var _html='<div class="media blockquote animate__animated animate__bounce">\
-                    <div class="media-body">\
+                    <div class="media-body mb-5">\
                         <h4 class="media-heading">{{ Auth::user()->name }}</h4>\
                         <p>'+_comment+'</p>\
                         <ul class="list-unstyled list-inline media-detail pull-left">\

@@ -44,4 +44,11 @@ Route::get('/myposts', [\App\Http\Controllers\UserPostController::class, 'index'
 
 Route::post('save-comment','\App\Http\Controllers\BlogPostController@save_comment');
 
+Route::get('/mycomments', [\App\Http\Controllers\CommentController::class, 'index'])->middleware('auth')->name('mycomments');
+Route::get('/mycomments/{comment}', [\App\Http\Controllers\CommentController::class, 'show']);
+Route::get('/mycomments/{comment}/edit', [\App\Http\Controllers\CommentController::class, 'edit']); //shows edit post form
+
+Route::put('/mycomments/{comment}/edit', [\App\Http\Controllers\CommentController::class, 'update']); //commits edited post to the database 
+Route::delete('/mycomments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']); //deletes post from the database
+
 require __DIR__.'/auth.php';

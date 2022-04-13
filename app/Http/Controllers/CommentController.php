@@ -14,7 +14,14 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        // $userid = currentuser->user_id;
+        $comments = Comment::where('user_id', '=', auth()->user()->user_id)->get();//get all comments from current user
+        //var_dump($currentuser);
+        //exit();
+        return view('blog.usercomments', [
+            'comments' => $comments,
+        ]); //returns the view with posts
+        
     }
 
     /**
@@ -46,7 +53,12 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+
+
+         return view('blog.showcomment', [
+        'comment'=> $comment,
+        ]); //returns the view with the post
+
     }
 
     /**
@@ -57,7 +69,8 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('blog.editcomment', [
+            'comment' => $comment, ]); //returns the edit view with the post
     }
 
     /**
@@ -69,7 +82,11 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $comment->update([            
+            'description' => $request->body
+        ]);
+        
+        return redirect('mycomments/' . $comment->comment_id);
     }
 
     /**
@@ -80,6 +97,8 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+
+        return redirect('/mycomments');
     }
 }
