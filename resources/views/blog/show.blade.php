@@ -4,7 +4,7 @@
 
     <div class="container">
         
-        @if (Auth::check() && $post->user_id == auth()->user()->user_id )
+        @if (Auth::check() && $post->user_id == auth()->user()->user_id || Auth::check() && auth()->user()->role == 'admin')
         <div class="row">
             <div class="col-md-12">
                 <a href="/blog/{{ $post->post_id }}/edit" class="btn btn-outline-primary">Edit Post</a>
@@ -39,12 +39,16 @@
         
             <h5 class="card-header">Comments <span class="comment-count float-right badge badge-info"></span></h5>
             <div class="card-body">
+                @if (Auth::check())
                 {{-- Add Comment --}}
                 <div class="add-comment mb-3">
                     @csrf
                     <textarea class="form-control comment" placeholder="Enter Comment"></textarea>
                     <button data-post="{{ $post->post_id }}" data-user="{{ Auth::user()->user_id }}" class="btn btn-dark btn-sm mt-2 save-comment">Submit</button>
                 </div>
+                @else
+
+                @endif
             </div>  
             <div class="comments">
                 
@@ -76,7 +80,7 @@
     
         
     </div>
-
+ @if (Auth::check())
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 // Save Comment
@@ -122,5 +126,6 @@ $(".save-comment").on('click',function(){
     });
 });
 </script>
+@endif
 
 @endsection
