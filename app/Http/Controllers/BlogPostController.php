@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use DB;
-
+use Mail;
 
 class BlogPostController extends Controller
 {
@@ -31,14 +31,38 @@ class BlogPostController extends Controller
     }
 
     public function save_comment(Request $request){
+        
         $data=new Comment;
         $data->post_id=$request->post;
         $data->description=$request->comment;
         $data->user_id=$request->user;
         $data->save();
         
+        $posts_user_id = DB::table('posts')
+        
+        ->where('posts.post_id', '=', $data->post_id)
+        ->get();
+
+        
+        
+
+        $email = DB::table('users')
+        ->where('users.user_id', '=', $posts_user_id->first()->post_id)
+        ->get();
+
+
+        $to_name = $email->first()->name;
+        $to_email = $email->first()->email;
+        $data = array('name'=>$email->first()->name, "body" => "Someone has added a comment to your post");
+        Mail::send('blog.mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Laravel Test Mail');
+        $message->from('hello@example.com','Test Mail');
+        });
+        
+
         return response()->json([
-            'bool'=>true
+            'bool'=>true,'email'=> $email->first()->email
         ]);
     }
 
@@ -60,6 +84,10 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'description' => 'required|max:255',  
+        ]);
         $newPost = Post::create([
             'title' => $request->title,
             'description' => $request->body,
