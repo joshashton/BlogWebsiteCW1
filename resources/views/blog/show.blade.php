@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
-
     <div class="container">
         
         @if (Auth::check() && $post->user_id == auth()->user()->user_id || Auth::check() && auth()->user()->role == 'admin')

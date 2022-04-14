@@ -104,34 +104,28 @@ class BlogPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
-    {
-        //$posts = Post::where('user_id', '=', auth()->user()->user_id)->get();//get all post from current user
-        //return $post; //returns the fetched posts
-
-        //$comment = Comment::all();
+    {    
+        //gets id of post
         $postid = $post -> post_id;
         
+        //joins commment table and the post table 
+        //gets all comments associated with the post
         $comments = DB::table('comments')
                 ->leftjoin('users','users.user_id','=','comments.user_id')
                 ->where('comments.post_id', '=', $postid)
                 ->orderby('comments.created_at', 'desc')
                 ->get();
-        
+        //gets the user who created the post 
         $posts = DB::table('posts')
                 ->leftjoin('users','users.user_id','=','posts.user_id')
                 ->where('posts.post_id', '=', $postid)
                 ->get();
-        // $posts = Post::leftjoin('users','users.user_id','=','posts.user_id')
-        //         ->where('posts.post_id', '=', $postid)->get();
         
-        //$comments = Comment::where('post_id', '=', $postid)->get();
-        //$users = User::where('user_id', '=', $comments->user_id)->get();
-        //$post -> post_id
         //var_dump($posts);
         //exit();
         return view('blog.show', [
             'post' => $posts->first(), 'comments' => $comments,
-        ]); //returns the view with the post
+        ]); //returns the view with the post and comments
     }
 
     /**
