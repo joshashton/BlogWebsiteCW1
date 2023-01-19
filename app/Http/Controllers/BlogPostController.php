@@ -86,7 +86,7 @@ class BlogPostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|unique:posts|max:255',
-            'description' => 'required|max:255',  
+            'body' => 'required|max:255',  
         ]);
         $newPost = Post::create([
             'title' => $request->title,
