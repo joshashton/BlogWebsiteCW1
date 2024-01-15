@@ -14,6 +14,7 @@ Using the arrow keys to rotate and thrust the space ship, the aim is to dodge an
 - Create posts - title, body, image
 - Edit posts - delete
 - Account area for User posts - User comments - create post - log out
+- API used to auto fill the database with synthetc posts
 
 
 ### Screenshots
