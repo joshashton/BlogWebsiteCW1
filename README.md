@@ -1,6 +1,6 @@
 # Blog Website 
 
-A blog website project made in Laravel for a university web development module.
+A blog website project made with Laravel and Bootstrap for a university web development module.
 
 
 ## Description
