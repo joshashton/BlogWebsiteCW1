@@ -5,15 +5,19 @@ A blog website project made with Laravel and Bootstrap for a university web deve
 
 ## Description
 
-Using the arrow keys to rotate and thrust the space ship, the aim is to dodge and shoot asteroids that are constantly flying around in space. Different sized asteroids are included and big asteroids break into smaller ones when shot. Asteroids drop power ups for the player to collect when they are destroyed. 
+Website where users can post their blogs. Users can then view and comment on other peoples posts. It has a user authentication system where you have to be signed in to create and comment on blog posts. The posts on the website are filled with mock data.
 
 ### Features
-- Email notifications on comments on user posts
+- Create posts - title, body, image
+- Edit/delete posts 
 - Account creation - user can only view posts if not logged in
 - Comment on posts
-- Create posts - title, body, image
-- Edit posts - delete
-- Account area for User posts - User comments - create post - log out
+- User Account area includes:
+  - User posts 
+  - User comments
+  - Create post 
+  - Log out
+- Email notifications when someone comments on your post
 - API used to auto fill the database with synthetc posts
 
 
@@ -21,8 +25,6 @@ Using the arrow keys to rotate and thrust the space ship, the aim is to dodge an
 <p align="center">
   <img width="600" height="300" src="https://github.com/joshashton/BlogWebsiteCW1/assets/74310545/37ed4ce2-a6fb-42c2-aae9-14cff9c89c8b">
 </p>
-
-
 
 <p align="center">
   <img width="600" height="300" src="https://github.com/joshashton/BlogWebsiteCW1/assets/74310545/9947e948-0cc5-4bd6-a31d-ab521576abe4">
